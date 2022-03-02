@@ -3,8 +3,8 @@ import { Item, Inner, Container,Pane, Title, SubTitle, Image } from "./styles/ju
 
 const Jumbotron = ({children, direction='row', ...restProps})  =>{
     return (
-        <Item>
-            <Inner direction={direction}>
+        <Item direction={direction}>
+            <Inner>
                 {children}
             </Inner>
         </Item>
@@ -12,24 +12,19 @@ const Jumbotron = ({children, direction='row', ...restProps})  =>{
         
     )
 }
-Jumbotron.Container = function JumbotronContainer({ children, ...restProps }) {
-    return <Container { ... restProps}>{children}</Container>;
-                                                                   
+Jumbotron.Container = function JumbotronContainer({children, ...restProps}){
+    return <Container { ...restProps}>{children}</Container>
 }
-Jumbotron.Pane = function JumbotronPane({ children, ...restProps }) {
-    return <Pane { ... restProps}>{children}</Pane>;
-                                                                   
+Jumbotron.Pane = function JumbotronPane({children, ...restProps}){
+    return <Pane {...restProps}>{children}</Pane>
 }
-Jumbotron.Title = function JumbotronTitle({ children, ...restProps }) {
-    return <Title { ... restProps}>{children}</Title>;
-                                                                   
+Jumbotron.Title = function JumbotronTitle({children, ...restProps}){
+    return <Title {...restProps}>{children}</Title>
 }
-Jumbotron.SubTitle = function JumbotronSubTitle({ children, ...restProps }) {
-    return <SubTitle { ... restProps}>{children}</SubTitle>;
-                                                                   
+Jumbotron.SubTitle = function JumbotronSubTitle({children, ...restProps}){
+    return <SubTitle {...restProps}>{children}</SubTitle>
 }
-Jumbotron.Image = function JumbotronImage({ ...restProps }) {
-    return <Image { ... restProps}></Image>;
-                                                                   
+Jumbotron.Image = function JumbotronImage({...restProps}){
+    return <Image {...restProps}></Image>
 }
 export default Jumbotron
