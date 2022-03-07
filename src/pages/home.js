@@ -6,8 +6,7 @@ import {HeaderContainer} from "../containers/header"
 import { Feature, OptForm } from "../components";
 const Home = () => {
     return(
-        <>
-            
+        <>  
             <HeaderContainer>
                 <Feature>
                     <Feature.Title>Unlimited movies, TV shows, and more.</Feature.Title>
