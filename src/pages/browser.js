@@ -1,11 +1,16 @@
 import React from "react";
 import { useContent } from "../hooks";
+import selectionFilter from "../utils/selection-filter"
+import {BrowserContainer} from '../containers/browser'
+
 const Browser = () => {
     const {series} = useContent('series')
     const {films} = useContent('films')
-    console.log(films)
+    
+    const slides = selectionFilter({series, films})
+
     return(
-       <p>From Browser</p>
+       <BrowserContainer slides={slides}/>
     )
 }
 export default Browser
