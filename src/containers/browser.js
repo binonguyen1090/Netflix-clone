@@ -53,6 +53,7 @@ export function BrowserContainer(slides) {
             he projects in a futile attempt to feel like he's part of the world
             around him.
           </Header.Text>
+          <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
     </>
