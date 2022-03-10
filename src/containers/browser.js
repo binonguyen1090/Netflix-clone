@@ -6,13 +6,13 @@ import * as ROUTES from '../constant/routes';
 import logo from '../logo.svg';
 
 export function BrowserContainer(slides) {
+  const [searchTerm, setSearchTerm] = useState("")
   const [profile, setProfile] = useState({})
   const [loading, setLoading] = useState(true)
   const {firebase} = useContext(FirebaseContext)
   const user = firebase.auth().currentUser || {}
 
   useEffect(() =>{
-    console.log('profole', profile)
     setTimeout(()=>{
       setLoading(false)
     },3000)
@@ -30,6 +30,7 @@ export function BrowserContainer(slides) {
           </Header.Group>
           <Header.Group>
             <Header.Profile>
+              <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               <Header.Picture src={user.photoURL} />
               <Header.Dropdown>
                 <Header.Group>

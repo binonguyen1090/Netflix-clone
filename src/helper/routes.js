@@ -6,7 +6,6 @@ export function IsUserRedirect({user, loggedInPath, children, ...restProps}){
         return children
     }
     if(user){
-        console.log('User -',loggedInPath );
         return(
             <Navigate to={loggedInPath} />
         )
