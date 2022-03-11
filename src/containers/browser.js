@@ -1,14 +1,19 @@
 import React, {useContext, useEffect, useState} from "react";
 import { SelectProfileContainer } from "./profile";
 import { FirebaseContext } from "../context/firebase";
-import {Header, Loading} from "../components"
+import {Card, Header, Loading} from "../components"
 import * as ROUTES from '../constant/routes';
 import logo from '../logo.svg';
 
 export function BrowserContainer(slides) {
+  const [category, setCategory] = useState("series")
+  // const [active, setActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [profile, setProfile] = useState({})
   const [loading, setLoading] = useState(true)
+  const [slideRows, setSlideRows] = useState([])
+
+
   const {firebase} = useContext(FirebaseContext)
   const user = firebase.auth().currentUser || {}
 
@@ -18,6 +23,10 @@ export function BrowserContainer(slides) {
     },3000)
   },[profile.displayName])
 
+  useEffect(() =>{
+    setSlideRows(slides[category])
+  },[slides, category])
+
   return profile.displayName ? (
     <>
       {loading ?  (<Loading src={user.photoURL} />) : <Loading.ReleaseBody />}
@@ -25,8 +34,8 @@ export function BrowserContainer(slides) {
         <Header.Frame>
           <Header.Group>
             <Header.Logo src={logo} to={ROUTES.HOME} alt="Netflix" />
-            <Header.TextLink>Series</Header.TextLink>
-            <Header.TextLink>Films</Header.TextLink>
+            <Header.TextLink active={category === "series" ? 'true' : 'false'} onClick={()=>setCategory("series")}>Series</Header.TextLink>
+            <Header.TextLink active={category === "films" ? 'true' : 'false'} onClick={()=>setCategory("films")}>Films</Header.TextLink>
           </Header.Group>
           <Header.Group>
             <Header.Profile>
@@ -56,6 +65,10 @@ export function BrowserContainer(slides) {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
+      <Card.Group>
+
+      </Card.Group>
     </>
         
     ):(
