@@ -24,20 +24,45 @@ Card.SubTitle = function CardSubTitle({children, ...restProps}){
 Card.Text = function CardText({children, ...restProps}){
     return <Text {...restProps}>{children}</Text>
 }
+Card.Entities = function CardEntities({ children, ...restProps }) {
+    return <Entities {...restProps}>{children}</Entities>;
+};
 Card.Meta = function CardMeta({children, ...restProps}){
     return <Meta {...restProps}>{children}</Meta>
 }
 Card.Item = function CardItem({item, children, ...restProps}){
-    const [setShowFeature, setItemFeature] = useContext(FeatureContext)
+    const {setShowFeature, setItemFeature} = useContext(FeatureContext)
 
 
-    return <Item 
+    return (<Item 
         onClick={()=>{
             setItemFeature(item)
             setShowFeature(true)
 
         }}
-    {...restProps}>{children}</Item>
+    {...restProps}>{children}</Item>)
+}
+Card.Feature = function CardFeature({category, children, ...restProps}){
+    const {showFeature, setShowFeature, itemFeature} = useContext(FeatureContext)
+
+    return (                 
+
+        showFeature ? (
+            <Feature {...restProps} src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}>
+                <Content>
+                    <FeatureTitle>{itemFeature.title}</FeatureTitle>
+                    <FeatureText>{itemFeature.description}</FeatureText>
+                    <FeatureClose onClick={()=> setShowFeature(false)}>
+                        <img src="/images/icons/close.png" alt="Close" />
+                    </FeatureClose>
+                </Content>
+            </Feature>
+        ) : (
+            null
+        )
+
+    )
+
 }
 Card.Image = function CardImage({children, ...restProps}){
     return <Image {...restProps} />

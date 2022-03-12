@@ -5,7 +5,7 @@ import {Card, Header, Loading} from "../components"
 import * as ROUTES from '../constant/routes';
 import logo from '../logo.svg';
 
-export function BrowserContainer(slides) {
+export function BrowserContainer({slides}) {
   const [category, setCategory] = useState("series")
   // const [active, setActive] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
@@ -25,6 +25,8 @@ export function BrowserContainer(slides) {
 
   useEffect(() =>{
     setSlideRows(slides[category])
+    console.log("Here")
+    console.log(slideRows)
   },[slides, category])
 
   return profile.displayName ? (
@@ -67,7 +69,25 @@ export function BrowserContainer(slides) {
       </Header>
 
       <Card.Group>
+          {slideRows.map((slideItem) => (
+            <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+              <Card.Title>{slideItem.title}</Card.Title>
+              <Card.Entities>
+                {slideItem.data.map((item) => (
+                  <Card.Item key={item.docId} item={item}>
+                    <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+                    <Card.Meta>
+                      <Card.SubTitle>{item.title}</Card.SubTitle>
+                      <Card.SubTitle>{item.description}</Card.SubTitle>
+                    </Card.Meta>
+                  </Card.Item>
+                ))}
+              </Card.Entities>
+              <Card.Feature category={category}>
 
+              </Card.Feature>
+            </Card>
+          ))}
       </Card.Group>
     </>
         
