@@ -4,6 +4,7 @@ import { FirebaseContext } from "../context/firebase";
 import {FooterContainer } from "./footer"
 import {Card, Header, Loading, Player} from "../components"
 import * as ROUTES from '../constant/routes';
+import Fuse from 'fuse.js'
 import logo from '../logo.svg';
 
 export function BrowserContainer({slides}) {
@@ -27,6 +28,16 @@ export function BrowserContainer({slides}) {
   useEffect(() =>{
     setSlideRows(slides[category])
   },[slides, category])
+
+  useEffect(() =>{
+    const fuse = new Fuse(slideRows, {keys:['data.title','data.description','data.genre']})
+    const result = fuse.search(searchTerm).map(({item}) => item)
+    if(slideRows.length > 0 && searchTerm.length > 3 && result.length > 0){
+      setSlideRows(result)
+    }else{
+      setSlideRows(slides[category])
+    }
+  },[searchTerm])
 
   return profile.displayName ? (
     <>
