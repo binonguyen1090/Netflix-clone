@@ -89,3 +89,17 @@ export const Submit = styled.button`
     opacity: 0.5;
   }
 `;
+export const Demo = styled.button`
+  background: green;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+  &:disabled {
+    opacity: 0.5;
+  }
+`;

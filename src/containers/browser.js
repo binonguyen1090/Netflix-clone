@@ -50,8 +50,8 @@ export function BrowserContainer({slides}) {
             <Header.TextLink active={category === "films" ? 'true' : 'false'} onClick={()=>setCategory("films")}>Films</Header.TextLink>
           </Header.Group>
           <Header.Group>
+            <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <Header.Profile>
-              <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               <Header.Picture src={user.photoURL} />
               <Header.Dropdown>
                 <Header.Group>

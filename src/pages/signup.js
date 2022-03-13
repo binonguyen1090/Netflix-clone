@@ -39,6 +39,21 @@ const SignUp = () => {
                 setError(e.message)
             })
     }
+    const handleDemo = (e) =>{
+        e.preventDefault();
+
+        firebase
+            .auth()
+            .signInWithEmailAndPassword("demo@gmail.com","123123")
+            .then(() =>{
+                navigate(ROUTES.BROWSE)
+            })
+            .catch((e)=>{
+                setEmailAddress('')
+                setPassword('')
+                setError(e.message)
+            })
+    }
     return(
         <>
             <HeaderContainer>
@@ -65,6 +80,7 @@ const SignUp = () => {
                             onChange={({target}) => setPassword(target.value)}
                         />
                         <Form.Submit type="submit" disable={isInvalid}>Sign Up</Form.Submit>
+                        <Form.Demo onClick={handleDemo}>Demo</Form.Demo>
                         <Form.Link to="/signin">Already a user ?</Form.Link>
                   
                     </Form.Base>

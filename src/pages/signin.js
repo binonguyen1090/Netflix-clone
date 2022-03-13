@@ -31,6 +31,21 @@ const SignIn = () => {
                 setError(e.message)
             })
     }
+    const handleDemo = (e) =>{
+        e.preventDefault();
+
+        firebase
+            .auth()
+            .signInWithEmailAndPassword("demo@gmail.com","123123")
+            .then(() =>{
+                navigate(ROUTES.BROWSE)
+            })
+            .catch((e)=>{
+                setEmailAddress('')
+                setPassword('')
+                setError(e.message)
+            })
+    }
     return(
         <>
             <HeaderContainer>
@@ -52,6 +67,7 @@ const SignIn = () => {
                             onChange={({target}) => setPassword(target.value)}
                         />
                         <Form.Submit type="submit" disable={isInvalid}>Sign In</Form.Submit>
+                        <Form.Demo onClick={handleDemo}>Demo</Form.Demo>
                     </Form.Base>
                     <Form.Text>
                         New to Netflix? <Form.Link to="/signup">Sign Up now.</Form.Link>
