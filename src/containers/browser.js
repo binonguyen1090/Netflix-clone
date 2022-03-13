@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import { SelectProfileContainer } from "./profile";
 import { FirebaseContext } from "../context/firebase";
-import {Card, Header, Loading} from "../components"
+import {FooterContainer } from "./footer"
+import {Card, Header, Loading, Player} from "../components"
 import * as ROUTES from '../constant/routes';
 import logo from '../logo.svg';
 
@@ -25,8 +26,6 @@ export function BrowserContainer({slides}) {
 
   useEffect(() =>{
     setSlideRows(slides[category])
-    console.log("Here")
-    console.log(slideRows)
   },[slides, category])
 
   return profile.displayName ? (
@@ -84,11 +83,15 @@ export function BrowserContainer({slides}) {
                 ))}
               </Card.Entities>
               <Card.Feature category={category}>
-
+                <Player>
+                  <Player.Button/>
+                  <Player.Video src="/videos/bunny.mp4" />
+                </Player>
               </Card.Feature>
             </Card>
           ))}
       </Card.Group>
+      <FooterContainer />
     </>
         
     ):(
